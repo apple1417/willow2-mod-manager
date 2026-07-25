@@ -2,6 +2,12 @@
 
 ## v3.9 (upcoming)
 
+### Legacy Compat v1.8
+- Linting fixes.
+
+### UI Utils v1.6
+- Linting fixes.
+
 ### Willow2 Mod Menu v3.7
 - Added a reset options button.
 
@@ -14,7 +20,7 @@
 ### [Keybinds v1.2](https://github.com/bl-sdk/willow_keybinds/blob/master/Readme.md#v12)
 > No functional changes. Updated linting and CI logic.
 
-### Legacy Compat v1.6
+### Legacy Compat v1.7
 - Extended the list of allowed versions before the kill switch activates.
 - Linting fixes.
 

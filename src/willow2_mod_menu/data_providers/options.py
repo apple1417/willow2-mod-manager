@@ -123,13 +123,14 @@ class OptionsDataProvider(DataProvider):
             or (
                 not isinstance(option, KeybindOption)
                 and isinstance(option, ValueOption)
-                and not(option.is_hidden and ignore_hidden)
+                and not (option.is_hidden and ignore_hidden)
             )
             for option in options
         )
 
     def add_grouped_option(
         self,
+        *,
         data_provider: UObject,
         the_list: UObject,
         options: Sequence[BaseOption],
@@ -273,12 +274,12 @@ class OptionsDataProvider(DataProvider):
                     logging.dev_warning(f"Found recursive options group, not drawing: {option}")
                 case GroupedOption():
                     self.add_grouped_option(
-                        data_provider,
-                        the_list,
-                        options,
-                        group_stack,
-                        option,
-                        options_idx,
+                        data_provider=data_provider,
+                        the_list=the_list,
+                        options=options,
+                        group_stack=group_stack,
+                        option=option,
+                        options_idx=options_idx,
                     )
 
                 case KeybindOption():
