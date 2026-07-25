@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.9 (upcoming)
+
+### Willow2 Mod Menu v3.7
+- Added a reset options button.
+
 ## v3.8: Slammer
 - Upgraded to Python 3.14.
 - Added the `mod_manager.extra_sys_path` config option.

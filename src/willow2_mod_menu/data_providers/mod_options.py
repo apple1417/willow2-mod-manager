@@ -1,7 +1,6 @@
 from dataclasses import KW_ONLY, dataclass, field
 from typing import TYPE_CHECKING
 
-import willow2_mod_menu.options_menu
 from mods_base import (
     BaseOption,
     BoolOption,
@@ -12,6 +11,7 @@ from mods_base import (
     NestedOption,
 )
 from willow2_mod_menu.description import get_mod_description
+from willow2_mod_menu.options_menu import dangerous_reload_current_page
 
 from . import (
     KB_TAG_HEADER,
@@ -92,22 +92,18 @@ class ModOptionsDataProvider(OptionsDataProvider):
         yield from display_options
 
         if self.has_value_options(display_options):
+
+            def on_reset(_: ButtonOption) -> None:
+                for mod_option in self.mod.options:
+                    mod_option.reset()
+
+                dangerous_reload_current_page()
+
             yield ButtonOption(
                 RESET_OPTIONS_NAME,
                 description=RESET_OPTIONS_DESCRIPTION,
-                on_press=lambda _: self._reset_mod_options(),
+                on_press=on_reset,
             )
-
-    def _reset_mod_options(self) -> None:
-        for mod_option in self.mod.options:
-            mod_option.reset()
-
-        # Circular imports are avoided by only importing the module.
-        if not willow2_mod_menu.options_menu.data_provider_stack:
-            return
-        if (the_list := willow2_mod_menu.options_menu.latest_list()) is None:
-            return
-        the_list.Refresh()
 
     @staticmethod
     def any_keybind_visible(options: Sequence[BaseOption]) -> bool:
